@@ -1,9 +1,10 @@
-1) Цыганов Артём Дмитриевич ФТ-301
+### 1) Цыганов Артём Дмитриевич ФТ-301
 
 Система:
 
 У меня консоль fish поэтому иногда вывод странно выглядит.
----
+
+```
 
   Static hostname: cachyos-x8664
         Icon name: computer-laptop
@@ -19,9 +20,12 @@ Chassis Asset Tag: NO Asset Tag
     Firmware Date: Wed 2025-04-30
      Firmware Age: 1y 5month 3w 2d
 
-2) Приложение
+```
+
+### 2) Приложение
 
 Приложение - адаптировал свой старый python task под веб приложение.
+
 Используя алгоритм фано архивирует и обратно текст отправленный в post запросе.
 
 Переменные окружения:
@@ -31,7 +35,7 @@ APP_MESSAGE - сообщение для задания
 FLASK_HOST - на каком айпи хостим
 FLASK_PORT - его порт (8000)
 
-3) Команды сборки:
+### 3) Команды сборки:
 
 Весь ход выполнения в работы и команды находятся в `evidence/console_snaps.md`
 
@@ -51,6 +55,7 @@ kubectl exec deployment/homework-1 -- printenv
 kubectl -n homework-1 port-forward deployment/homework-1 8082:8000  
 ```
 
+### 4) Вывод тега
 ``` 
 The push refers to repository [localhost:5001/tsiganov-homework]
 6aaf5b0aae75: Layer already exists 
@@ -65,11 +70,11 @@ bb8166eb34e6: Layer already exists
 012a5861ae59: Layer already exists 
 v2.0: digest: sha256:b18ae162116839f726fa8f974c47cb006a4003b030832cd241625b76db0f6fa8 size: 856
 ```
-5) Эксперементы и список deployment
+### 5) Эксперементы и список deployment
 
 Всё в основном в `evidence/console_snaps.md` так как занимают много места
 
-```
+```bash
 
 ◄ 0s ◎ kubectl get deployments              
 NAME         READY   UP-TO-DATE   AVAILABLE   AGE
@@ -92,20 +97,22 @@ homework-1-69c96fc9c7-wncc9   1/1     Running   0          34m
 Объяснение эксперимент 2: До перезапуска значения использовались из памяти, но после команды rollout restart поды пересоздались, заново подтянули данные из обновлённого ConfigMap
 
 
-6)
+### 6) Термины
 labels - это метки-теги на объектах (например, app: myapp),
+
 selector - фильтр, по которому Deployment или Service находит свои поды среди остальных.
 
 requests - сколько ресурсов гарантом выделяется поду при старте
+
 limits - максимум ресурсов для пода.
 
 ConfigMap хранит обычные открытые настройки (конфиги, env-переменные), 
+
 Secret хранит более конфиденциальные данные (пароли, ключи, токены).
 
 Base64 - это метод кодирования, а не шифрования.
 
-
-7) УДАЛЕНИЕ
+### 7) УДАЛЕНИЕ
 
 ``` bash
 kubectl delete namespace homework-1
